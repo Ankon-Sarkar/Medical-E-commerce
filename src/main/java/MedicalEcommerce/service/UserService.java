@@ -31,4 +31,15 @@ public class UserService {
     public UserDtls getuserid(String sellername) {
         return userRepo.getuserid(sellername);
     }
+
+    public void set_user_role(UserDtls user) {
+        if (user.getRole().equals("customer")) {
+//            System.out.println(user.getRole());
+            user.setRole("ROLE_CUSTOMER");
+        }
+        else if (user.getRole().equals("seller")) {
+            user.setRole("ROLE_SELLER");
+
+        }
+    }
 }

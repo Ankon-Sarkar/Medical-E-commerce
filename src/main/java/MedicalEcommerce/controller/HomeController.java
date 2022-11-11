@@ -52,14 +52,7 @@ public class HomeController {
 
         user.setPassword(passwordEncode.encode(user.getPassword()));
 
-        if (user.getRole().equals("customer")) {
-//            System.out.println(user.getRole());
-            user.setRole("ROLE_CUSTOMER");
-        }
-        else if (user.getRole().equals("seller")) {
-            user.setRole("ROLE_SELLER");
-
-        }
+        userservice.set_user_role(user);
 
         UserDtls u = userservice.checkUser(user);
 
