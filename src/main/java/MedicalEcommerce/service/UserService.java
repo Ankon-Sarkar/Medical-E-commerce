@@ -11,6 +11,8 @@ public class UserService {
     @Autowired
     UserRepository userRepo;
 
+
+    //checking user existence
     public UserDtls checkUser(UserDtls user){
         String email=user.getEmail();
 //        System.out.println(email);

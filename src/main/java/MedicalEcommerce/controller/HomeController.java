@@ -46,6 +46,8 @@ public class HomeController {
         return "signup";
     }
 
+
+    //register user and assign role to users
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute UserDtls user, Model m, HttpSession session) {
 
@@ -54,6 +56,8 @@ public class HomeController {
 
         userservice.set_user_role(user);
 
+
+        //checking user existence, if a user has same email address he cannot register
         UserDtls u = userservice.checkUser(user);
 
         if (u == null) {
@@ -67,6 +71,8 @@ public class HomeController {
         return "redirect:/signup";
     }
 
+
+    //redirect to customer dashboard
     @GetMapping("/Customerwelcome")
     public String WelcomeCustomer(HttpServletRequest request, Model model){
         Principal principal = request.getUserPrincipal();
@@ -75,6 +81,8 @@ public class HomeController {
         return "Customerwelcome";
     }
 
+
+    //redirect to seller dashboard
     @GetMapping("/Sellerwelcome")
     public String WelcomeSeller(HttpServletRequest request, Model model){
         Principal principal = request.getUserPrincipal();
@@ -82,6 +90,8 @@ public class HomeController {
         return "Sellerwelcome";
     }
 
+
+    //redirect to Admin dashboard
     @GetMapping("/Adminwelcome")
     public String WelcomeAdmin(HttpServletRequest request, Model model){
         Principal principal = request.getUserPrincipal();
