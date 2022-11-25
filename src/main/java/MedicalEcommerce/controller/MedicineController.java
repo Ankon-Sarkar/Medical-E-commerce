@@ -6,9 +6,9 @@ import MedicalEcommerce.model.UserDtls;
 import MedicalEcommerce.service.MedicineService;
 import MedicalEcommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,28 +30,27 @@ public class MedicineController {
     int med_id;
 
     @GetMapping("/addMedicine")
-    public String addMedicinepage(){
+    public String addMedicinepage() {
         return "addMedicine";
 
     }
 
-    @PostMapping("/addMedicine")
+    @PostMapping("/saveMedicine")
     public String saveProduct(@ModelAttribute Medicine medicine, Model model, HttpSession session, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
-
-            Principal principal = request.getUserPrincipal();
-            String sellername=principal.getName();
-            medicine.setSeller(sellername);
-            UserDtls sellerid=userService.getuserid(sellername);
-            medicine.setUser(sellerid);
-            medicineservice.saveProduct(medicine, file);
-            session.setAttribute("msg", "Product Added");
-            return "addMedicine";
-        }
+        Principal principal = request.getUserPrincipal();
+        String seller_mail = principal.getName();
+        medicine.setSeller_email(seller_mail);
+        UserDtls sellerid = userService.getuserid(seller_mail);
+        medicine.setSeller(sellerid);
+        medicineservice.saveProduct(medicine, file);
+        session.setAttribute("msg", "Product Added");
+        return "addMedicine";
+    }
 
     @GetMapping("/ViewSellerStock")
-    public String CustomerView(Model model,HttpServletRequest request) {
+    public String CustomerView(Model model, HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
-        String sellername=principal.getName();
+        String sellername = principal.getName();
         List<Medicine> details = medicineservice.getSockInfo(sellername);
         model.addAttribute("med", details);
         return "ViewStock";
@@ -59,26 +58,19 @@ public class MedicineController {
 
     @GetMapping("/editMedicine/{id}")
     public String edit(@PathVariable int id, Model m) {
-         med_id=id;
+        med_id = id;
         Medicine medicine = medicineservice.getMedById(id);
         m.addAttribute("med", medicine);
         return "EditMedicineInfo";
     }
 
     @PostMapping("/updateMedicine")
-    public String updateUser(@ModelAttribute Medicine medicine, HttpSession session, MultipartFile imagefile) {
-        Medicine med=medicineservice.getMedById(med_id);
-
-        med.setMedicine_name(medicine.getMedicine_name());
-        med.setMedicine_composition(medicine.getMedicine_composition());
-        med.setManufacturing_company(medicine.getManufacturing_company());
-        med.setPrice(medicine.getPrice());
-        med.setQuantity(medicine.getQuantity());
-        med.setAbout(medicine.getAbout());
-
-        medicineservice.update_Medinfo(med);
+    public String updateMed(@ModelAttribute Medicine medicine, HttpSession session, MultipartFile imagefile) {
+        Medicine med = medicineservice.getMedById(med_id);
+        Medicine upadated_info = medicineservice.set_new_info(med, medicine);
+        medicineservice.update_Medinfo(upadated_info);
         session.setAttribute("msg", "Medicine Data  has been Successfully Updated..");
-        return "redirect:/editMedicine/"+med.getMedicine_id();
+        return "redirect:/editMedicine/" + med.getMedicine_id();
     }
 
     @GetMapping("/deleteMedicine/{id}")
@@ -90,15 +82,30 @@ public class MedicineController {
 
     @GetMapping("/ViewMedicineDetails/{id}")
     public String ViewMedDetails(@PathVariable int id, Model m) {
-        med_id=id;
+        med_id = id;
         Medicine medicine = medicineservice.getMedById(id);
         m.addAttribute("med", medicine);
         return "SellersideProductDetails";
     }
 
 
-
+    @GetMapping("/search")
+    public String search(Model model, @Param("keyword") String keyword) {
+        if(keyword!=null) {
+            System.out.println(keyword);
+            List<Medicine> med = medicineservice.getByKeyword(keyword);
+            model.addAttribute("med", med);
+            System.out.println(med);
         }
+        return "ViewAllMedicine";
+
+    }
+
+
+
+
+
+}
 
 
 

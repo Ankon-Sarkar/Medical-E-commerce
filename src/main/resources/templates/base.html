@@ -29,23 +29,33 @@
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}"><i class="bi bi-capsule-pill"></i>
             MEDIC</a>
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Features</a>
+                <a class="nav-item nav-link" href="#">Pricing</a>
+                <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            </div>
 
 
     </div>
-    <div class="float-right"> <a th:href="@{/login}"
-                                 class="btn btn-success">
-        Login</a></div><br>
 
-    <div class="float-right"> <a th:href="@{/signup}"
-                                 class="btn btn-primary">
-        Register</a></div><br>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a th:href="@{/login}"
+                   class="btn btn-success">
+                Login</a></li>
+
+            <li> <a th:href="@{/signup}"
+                    class="btn btn-primary">
+                Register</a></li>
+        </ul>
+
+
 
     </div>
 </nav>

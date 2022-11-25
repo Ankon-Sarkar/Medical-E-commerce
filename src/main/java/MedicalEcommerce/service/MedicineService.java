@@ -16,16 +16,15 @@ import java.util.Optional;
 @Service
 public class MedicineService {
 
-    private String UPLOADED_FOLDER="Medicine images";
-
+    private String UPLOADED_FOLDER = "Medicine images";
 
 
     @Autowired
     MedicineRepository medicineRepository;
 
     public void saveProduct(Medicine medicine, MultipartFile imagefile) throws IOException {
-        if(imagefile==null){
-    MedicineRepository medicineRepository;
+        if (imagefile == null) {
+            MedicineRepository medicineRepository;
             medicine.setImage(null);
         }
         String fileName = StringUtils.cleanPath(imagefile.getOriginalFilename());
@@ -60,23 +59,36 @@ public class MedicineService {
     }
 
 
-
     public void updateStock(Medicine med, int ordered_unit) {
-        med.setQuantity(med.getQuantity()-ordered_unit);
+        med.setQuantity(med.getQuantity() - ordered_unit);
         medicineRepository.save(med);
     }
 
     public boolean CheckMedStock(Medicine med, int ordered_unit) {
-        int stock=med.getQuantity();
-        if (stock>=ordered_unit){
-            return  true;
-        }
-        else
+        int stock = med.getQuantity();
+        if (stock >= ordered_unit) {
+            return true;
+        } else
             return false;
     }
 
     public int findMedPrice(Medicine medicine) {
         return Integer.parseInt(medicine.getPrice());
+    }
+
+
+    public Medicine set_new_info(Medicine previous_info, Medicine new_info) {
+        previous_info.setMedicine_name(new_info.getMedicine_name());
+        previous_info.setMedicine_composition(new_info.getMedicine_composition());
+        previous_info.setManufacturing_company(new_info.getManufacturing_company());
+        previous_info.setPrice(new_info.getPrice());
+        previous_info.setQuantity(new_info.getQuantity());
+        previous_info.setAbout(new_info.getAbout());
+        return previous_info;
+    }
+
+    public List<Medicine> getByKeyword(String keyword) {
+        return medicineRepository.findByKeyword(keyword);
     }
 }
 

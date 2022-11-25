@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 
 
 import MedicalEcommerce.model.UserDtls;
-import MedicalEcommerce.repository.UserRepository;
 import MedicalEcommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,8 +27,6 @@ public class HomeController {
     @Autowired
     private UserService userservice;
 
-    @Autowired
-    private UserRepository userRepo;
 
     @GetMapping("/")
     public String home() {
@@ -51,20 +48,17 @@ public class HomeController {
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute UserDtls user, Model m, HttpSession session) {
 
-
         user.setPassword(passwordEncode.encode(user.getPassword()));
 
         userservice.set_user_role(user);
 
-
-        //checking user existence, if a user has same email address he cannot register
+        //checking user existence, if a existing user has same email address he/she cannot register
         UserDtls u = userservice.checkUser(user);
 
         if (u == null) {
             userservice.register(user);
             session.setAttribute("msg", "Successfully Register");
-        }
-        else {
+        } else {
             session.setAttribute("msg", "Try with another email address");
         }
 
@@ -74,31 +68,30 @@ public class HomeController {
 
     //redirect to customer dashboard
     @GetMapping("/Customerwelcome")
-    public String WelcomeCustomer(HttpServletRequest request, Model model){
+    public String WelcomeCustomer(HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
 //        System.out.println(principal.getName());
-        model.addAttribute("username",principal.getName() );
+        model.addAttribute("username", principal.getName());
         return "Customerwelcome";
     }
 
 
     //redirect to seller dashboard
     @GetMapping("/Sellerwelcome")
-    public String WelcomeSeller(HttpServletRequest request, Model model){
+    public String WelcomeSeller(HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
-        model.addAttribute("username",principal.getName() );
+        model.addAttribute("username", principal.getName());
         return "Sellerwelcome";
     }
 
 
     //redirect to Admin dashboard
     @GetMapping("/Adminwelcome")
-    public String WelcomeAdmin(HttpServletRequest request, Model model){
+    public String WelcomeAdmin(HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
-        model.addAttribute("username",principal.getName() );
+        model.addAttribute("username", principal.getName());
         return "Adminwelcome";
     }
-
 
 
 }

@@ -11,11 +11,8 @@ public class Medicine {
     private int medicine_id;
 
 
-
-
-
     private String medicine_name;
-    private String seller;
+    private String seller_email;
     private String price;
     private int quantity;
     private String medicine_composition;
@@ -26,16 +23,21 @@ public class Medicine {
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
 
+    public Medicine() {
+    }
+
+    public Medicine(String test_med, String s) {
+    }
 
 
     @ManyToOne
-    private  UserDtls user;
+    private  UserDtls seller;
 
-//    @OneToMany(mappedBy="medicine", cascade = CascadeType.REMOVE)
-//    private Set<Cart> cart;
-//
-//    @OneToMany(mappedBy="product", cascade = CascadeType.REMOVE)
-//    private List<OrderDtls> orders;
+    @OneToMany(mappedBy="medicine", cascade = CascadeType.REMOVE)
+    private List<Cart> cart;
+
+    @OneToMany(mappedBy="product", cascade = CascadeType.REMOVE)
+    private List<OrderDtls> orders;
 
 
 
@@ -56,12 +58,12 @@ public class Medicine {
         this.medicine_name = medicine_name;
     }
 
-    public String getSeller() {
-        return seller;
+    public String getSeller_email() {
+        return seller_email;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
+    public void setSeller_email(String seller_email) {
+        this.seller_email = seller_email;
     }
 
     public String getPrice() {
@@ -110,29 +112,32 @@ public class Medicine {
     public void setManufacturing_company(String manufacturing_company) {
         this.manufacturing_company = manufacturing_company;
     }
-    public UserDtls getUser() {
-        return user;
+
+    public UserDtls getSeller() {
+        return seller;
     }
 
-    public void setUser(UserDtls user) {
-        this.user = user;
+    public void setSeller(UserDtls seller) {
+        this.seller = seller;
     }
 
-//    public Set<Cart> getCart() {
-//        return cart;
-//    }
-//
-//    public void setCart(Set<Cart> cart) {
-//        this.cart = cart;
-//    }
-//
-//    public List<OrderDtls> getOrders() {
-//        return orders;
-//    }
-//
-//    public void setOrders(List<OrderDtls> orders) {
-//        this.orders = orders;
-//    }
+
+
+    public List<Cart> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<Cart> cart) {
+        this.cart = cart;
+    }
+
+    public List<OrderDtls> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderDtls> orders) {
+        this.orders = orders;
+    }
 }
 
 

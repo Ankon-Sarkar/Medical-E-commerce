@@ -3,101 +3,72 @@
 
 <head th:replace="base::head" />
 <title>Home Page</title>
+</head>
 
 <body>
 <div th:replace="base::nav">
 
 </div>
 
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-        </ol>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<!-- </body> -->
 
-        <div class="carousel-inner">
+<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
 
-            <div class="carousel-item active">
-                <img alt="" th:src="@{HomepagePic/pic1.jpg}"
-                     style="width: 1550px; height: 700px;">
-                <div class="carousel-caption d-none d-md-block">
+    <div class="carousel-inner">
 
-                </div>
+        <div class="carousel-item active">
+            <img alt="" th:src="@{HomepagePic/pic1.jpg}"
+                 style="width: 1550px; height: 700px;">
+            <div class="carousel-caption d-none d-md-block">
+
             </div>
-
-            <div class="carousel-item">
-                <img alt="" th:src="@{HomepagePic/pic2.jpg}"
-                     style="width: 1550px; height: 700px;">
-                <div class="carousel-caption d-none d-md-block">
-
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <img alt="" th:src="@{HomepagePic/pic3.jpg}"
-                     style="width: 1550px; height: 700px;">
-                <div class="carousel-caption d-none d-md-block">
-
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img alt="" th:src="@{HomepagePic/pic4.jpg}"
-                     style="width: 1500px; height: 700px;">
-                <div class="carousel-caption d-none d-md-block">
-
-                </div>
-            </div>
-
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+
+        <div class="carousel-item">
+            <img alt="" th:src="@{HomepagePic/pic2.jpg}"
+                 style="width: 1550px; height: 700px;">
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img alt="" th:src="@{HomepagePic/pic3.jpg}"
+                 style="width: 1550px; height: 700px;">
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img alt="" th:src="@{HomepagePic/pic4.jpg}"
+                 style="width: 1500px; height: 700px;">
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+        </div>
+
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
-
-    <!-- Footer -->
-
-    <footer class="page-footer font-small teal pt-4" >
-
-        <!-- Footer Text -->
-        <div class="container-fluid text-center text-md-left" >
-
-            <!-- Grid row -->
-            <div class="row">
-
-                <!-- Grid column -->
-                <div class="col-md-6 mt-md-0 mt-3" >
-
-                    <!-- Content -->
-                    <h5 class="text-uppercase font-weight-bold">Footer text 1</h5>
-                    <p>contact: +6541289</p>
-
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none pb-3">
-
-                <!-- Grid column -->
-                <div class="col-md-6 mb-md-0 mb-3">
-
-                    <!-- Content -->
-                    <h5 class="text-uppercase font-weight-bold">Footer text 2</h5>
-                    <p></p>
-
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
-
-        </div>
-        <!-- Footer Text -->
+<!-- Footer Text -->
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2020 Copyright:
@@ -108,7 +79,6 @@
     </footer>
     <!-- Footer -->
 
-</section>
 
 </body>
 </html>

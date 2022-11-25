@@ -1,0 +1,69 @@
+package MedicalEcommerce.controller;
+
+
+import MedicalEcommerce.model.UserDtls;
+import MedicalEcommerce.service.AdminService;
+import MedicalEcommerce.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+@Controller
+public class AdminController {
+
+    @Autowired
+     UserService userservice;
+    @Autowired
+    AdminService adminService;
+
+    UserDtls u;
+
+
+    @GetMapping("/viewAllCustomer")
+    public String CustomerView(Model model) {
+        List<UserDtls> details = adminService.getCustomersInfo();
+        model.addAttribute("u", details);
+        return "ViewCustomrs";
+    }
+
+    @GetMapping("/viewAllSeller")
+    public String view(Model model) {
+        List<UserDtls> details = adminService.getSellersInfo();
+        model.addAttribute("u", details);
+        return "ViewSellers";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable int id, Model m) {
+        u = adminService.getUserById(id);
+        m.addAttribute("user", u);
+        return "EditUserinfo";
+    }
+
+
+
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute UserDtls user, HttpSession session) {
+        UserDtls updated_info=userservice.edit_userinfo(u,user);
+        userservice.update_info(updated_info);
+        session.setAttribute("msg", "User Data  has been Successfully Updated..");
+        return "redirect:/edit/" + u.getId();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable int id, HttpSession session) {
+        adminService.deleteUser(id);
+        session.setAttribute("msg", "User has been Successfully Deleted..");
+        return "redirect:/Adminwelcome";
+    }
+
+
+
+}

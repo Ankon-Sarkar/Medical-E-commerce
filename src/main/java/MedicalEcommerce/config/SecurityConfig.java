@@ -46,13 +46,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/Sellerwelcome").hasRole("SELLER")
+        http.authorizeRequests().antMatchers("/Sellerwelcome", "/addMedicine","/ViewSellerStock","/editMedicine/{id}",
+                        "/updateMedicine","/deleteMedicine/{id}","/ViewMedicineDetails/{id}")
+                .hasRole("SELLER")
 
                 .antMatchers("/Customerwelcome").hasRole("CUSTOMER")
 
 
 
-                .antMatchers("/Adminwelcome").hasRole("ADMIN")
+                .antMatchers("/Adminwelcome","/viewAllCustomer","/viewAllSeller","/edit/{id}","/update","/delete/{id}")
+                .hasRole("ADMIN")
                 .antMatchers("/**").permitAll().and().formLogin().loginPage("/login").loginProcessingUrl("/login").successHandler(successHandler).and() .logout() .logoutUrl("/logout")
                 .logoutSuccessUrl("/login");
 

@@ -3,6 +3,7 @@ package MedicalEcommerce.repository;
 import MedicalEcommerce.model.UserDtls;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public interface UserRepository extends JpaRepository<UserDtls,Integer>{
     public void deleteById(int id);
 
     @Query("Select s from UserDtls s where email =?1")
-    UserDtls getuserid(String seller);
+    UserDtls getuserid(String user);
+
 
 }

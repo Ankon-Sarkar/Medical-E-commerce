@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base::head" />
+<title>Add Medicine</title>
+
+<body>
+<div th:replace="userheader::nav">
+</div>
+
+<div th:if=${session.msg}>
+  <div class="alert alert-success" role="alert" th:text="${session.msg}">
+  </div>
+  <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+</div>
+
+  <div class="text-center mt-3">
+    <h1><p style="color:#000080;">Customers info </h1>
+  </div>
+
+
+<div class="container p-5">
+  <table class="table table-striped" border="1">
+    <thead class="bg-primary text-white">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Action</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="e : ${u}">
+      <th th:text="${e.id}">1</th>
+      <td th:text="${e.name}"></td>
+      <td th:text="${e.email}"></td>
+
+
+      <td><a class="btn btn-sm btn-primary"
+             th:href="@{/edit/{id}(id=${e.id})}">Edit</a>
+
+        <a class="btn btn-sm btn-danger"
+              th:href="@{/delete/{id}(id=${e.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+
+
+</div>
+</section>
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

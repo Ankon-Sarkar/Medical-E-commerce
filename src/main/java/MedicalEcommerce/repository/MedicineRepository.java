@@ -12,11 +12,12 @@ import java.util.Optional;
 @Repository
 public interface MedicineRepository extends JpaRepository<Medicine, Integer> {
 
-    @Query("Select m from Medicine m where seller =?1")
+    @Query("Select m from Medicine m where seller_email =?1")
     List<Medicine> findStockBYSeller(String seller);
 
 
     public Optional<Medicine> findById(int id);
 
-
+    @Query("Select m from Medicine m where manufacturing_company like %:keyword% or medicine_composition like %:keyword%")
+    List<Medicine> findByKeyword(String keyword);
 }

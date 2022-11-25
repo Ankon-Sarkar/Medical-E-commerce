@@ -1,9 +1,7 @@
 package MedicalEcommerce.model;
 
 import javax.persistence.*;
-
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
@@ -19,8 +17,35 @@ public class UserDtls {
 
     private String role;
 
+    @OneToMany(mappedBy="seller", cascade = CascadeType.REMOVE)
+    private List<Medicine> medicines;
 
+    @OneToMany(mappedBy="buyer", cascade = CascadeType.REMOVE)
+    private List<OrderDtls> orderDtls;
 
+    @OneToMany(mappedBy="customer", cascade = CascadeType.REMOVE)
+    private List<Cart> cart;
+
+    public List<Cart> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<Cart> cart) {
+        this.cart = cart;
+    }
+
+    @OneToMany(mappedBy="sellerID", cascade = CascadeType.REMOVE)
+    private List<OrderDtls> orderitem;
+
+    public UserDtls() {
+    }
+
+    public UserDtls( String name, String email, String password, String role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     public int getId() {
         return id;
@@ -63,5 +88,27 @@ public class UserDtls {
         this.role = role;
     }
 
-
+    public List<Medicine> getMedicines() {
+        return medicines;
     }
+
+    public void setMedicines(List<Medicine> medicines) {
+        this.medicines = medicines;
+    }
+
+    public List<OrderDtls> getOrderDtls() {
+        return orderDtls;
+    }
+
+    public void setOrderDtls(List<OrderDtls> orderDtls) {
+        this.orderDtls = orderDtls;
+    }
+
+    public List<OrderDtls> getOrderitem() {
+        return orderitem;
+    }
+
+    public void setOrderitem(List<OrderDtls> orderitem) {
+        this.orderitem = orderitem;
+    }
+}
