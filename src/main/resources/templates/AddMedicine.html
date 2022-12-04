@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="base::head" />
+<head th:replace="base::head"/>
 <title>Add Medicine</title>
 
 <body>
@@ -9,78 +9,78 @@
 
 </div>
 
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card mt-2 paint-card">
-          <h1 class="text-center">Add New Product Here</h1>
+        <div class="col-md-6 offset-md-3">
+            <div class="card mt-2 paint-card">
+                <h1 class="text-center">Add New Product Here</h1>
 
-          <!--alert message  -->
-          <div th:if="${session.msg}"
-               class="text-center">
+                <!--alert message  -->
+                <div th:if="${session.msg}"
+                     class="text-center">
 
-            <h4 class="text-success" th:text="${session.msg}"></h4>
-            <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
-          </div>
+                    <h4 class="text-success" th:text="${session.msg}"></h4>
+                    <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+                </div>
 
-          <!--alert message  -->
+                <!--alert message  -->
 
-          <div class="card-body">
-            <form th:action="@{/saveMedicine}" method="post" enctype="multipart/form-data">
-
-
-
-              <div class="form-group mt-2">
-                <label>Enter Medicine Name</label> <input type="text" name="medicine_name"
-                                                 class="form-control" required="required">
-
-              </div>
-
-              <div class="form-group mt-2">
-                <label>Enter Medicine Composition</label> <input type="text" name="medicine_composition"
-                                                  class="form-control" required="required">
-              </div>
-
-              <div class="form-group mt-2">
-                <label>Enter Manufacturing Company Name</label> <input type="text" name="manufacturing_company"
-                                                                 class="form-control" required="required">
-              </div>
-
-              <div class="form-group mt-2">
-                <label>Enter Price</label> <input type="number"
-                                                     name="price" class="form-control" required="required">
-              </div>
+                <div class="card-body">
+                    <form th:action="@{/saveMedicine}" method="post" enctype="multipart/form-data">
 
 
-          <div class="form-group mt-2">
-            <label>Enter Quantity</label> <input type="number"
-                                              name="quantity" class="form-control" required="required">
-          </div>
-              <div class="form-group mt-2">
+                        <div class="form-group mt-2">
+                            <label>Enter Medicine Name</label> <input type="text" name="medicine_name"
+                                                                      class="form-control" required="required">
+
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Enter Medicine Composition</label> <input type="text" name="medicine_composition"
+                                                                             class="form-control" required="required">
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Enter Manufacturing Company Name</label> <input type="text"
+                                                                                   name="manufacturing_company"
+                                                                                   class="form-control"
+                                                                                   required="required">
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Enter Price</label> <input type="number"
+                                                              name="price" class="form-control" required="required">
+                        </div>
+
+
+                        <div class="form-group mt-2">
+                            <label>Enter Quantity</label> <input type="number"
+                                                                 name="quantity" class="form-control"
+                                                                 required="required">
+                        </div>
+                        <div class="form-group mt-2">
 									<textarea rows="3" cols="" class="form-control" name="about"
                                               placeholder="Enter About"></textarea>
-              </div>
+                        </div>
 
-              <div>
-                <input type="file" name="file" /><br/><br/>
-              </div>
-
-
-              <div class="text-center mt-3">
-                <button class="btn bg-primary text-white">Submit</button>
-                <button type="reset" class="btn btn-primary text-white">Reset</button>
-              </div>
+                        <div>
+                            <input type="file" name="file"/><br/><br/>
+                        </div>
 
 
+                        <div class="text-center mt-3">
+                            <button class="btn bg-primary text-white">Submit</button>
+                            <button type="reset" class="btn btn-primary text-white">Reset</button>
+                        </div>
 
 
-            </form>
-          </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
-
-      </div>
     </div>
-  </div>
+</div>
 </section>
 </body>
 </html>

@@ -80,22 +80,12 @@ public class MedicineController {
         return "redirect:/ViewSellerStock";
     }
 
-    @GetMapping("/ViewMedicineDetails/{id}")
-    public String ViewMedDetails(@PathVariable int id, Model m) {
-        med_id = id;
-        Medicine medicine = medicineservice.getMedById(id);
-        m.addAttribute("med", medicine);
-        return "SellersideProductDetails";
-    }
-
-
     @GetMapping("/search")
     public String search(Model model, @Param("keyword") String keyword) {
         if(keyword!=null) {
             System.out.println(keyword);
             List<Medicine> med = medicineservice.getByKeyword(keyword);
             model.addAttribute("med", med);
-            System.out.println(med);
         }
         return "ViewAllMedicine";
 

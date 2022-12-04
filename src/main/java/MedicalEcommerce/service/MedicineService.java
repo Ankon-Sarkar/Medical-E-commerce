@@ -90,5 +90,10 @@ public class MedicineService {
     public List<Medicine> getByKeyword(String keyword) {
         return medicineRepository.findByKeyword(keyword);
     }
+
+
+    public List<Medicine> getAllMedicine() {
+        return medicineRepository.findAll();
+    }
 }
 

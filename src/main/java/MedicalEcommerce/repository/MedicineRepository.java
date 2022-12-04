@@ -18,6 +18,7 @@ public interface MedicineRepository extends JpaRepository<Medicine, Integer> {
 
     public Optional<Medicine> findById(int id);
 
-    @Query("Select m from Medicine m where manufacturing_company like %:keyword% or medicine_composition like %:keyword%")
+    @Query("Select m from Medicine m where manufacturing_company like %:keyword% or medicine_composition like %:keyword% " +
+            "or medicine_name like %:keyword%")
     List<Medicine> findByKeyword(String keyword);
 }

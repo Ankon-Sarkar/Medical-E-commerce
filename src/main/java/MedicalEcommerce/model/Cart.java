@@ -12,6 +12,14 @@ public class Cart {
     @ManyToOne
     private UserDtls customer;
 
+    public Cart() {
+    }
+
+    public Cart(UserDtls customer, Medicine medicine) {
+        this.customer = customer;
+        this.medicine = medicine;
+    }
+
     @ManyToOne
     private Medicine medicine;
 

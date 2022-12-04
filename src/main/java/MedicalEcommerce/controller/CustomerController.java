@@ -22,7 +22,6 @@ import java.util.List;
 @Controller
 public class CustomerController {
 
-    int med_id;
 
 
     @Autowired
@@ -39,17 +38,24 @@ public class CustomerController {
 
     @GetMapping("/ViewAllMedicine")
     public String CustomerView(Model model, HttpServletRequest request) {
-        List<Medicine> details = customerService.getAllMedicine();
+        List<Medicine> details = medicineservice.getAllMedicine();
         model.addAttribute("med", details);
         return "ViewAllMedicine";
     }
 
     @GetMapping("/Customerside_ViewMedicineDetails/{id}")
-    public String ViewMedDetails(@PathVariable int id, Model m) {
-        med_id = id;
+    public String ViewMedDetails(@PathVariable int id, Model model,HttpServletRequest request) {
         Medicine medicine = medicineservice.getMedById(id);
-        m.addAttribute("med", medicine);
-        return "CustomersideProductDtls";
+        model.addAttribute("med", medicine);
+        model.addAttribute("role","customer");
+
+        Principal principal = request.getUserPrincipal();
+
+        if (principal == null) {
+            model.addAttribute("user", "anonymous");
+        }
+
+        return "ProductDtls";
     }
 
     @GetMapping("/viewMyOrders")

@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/updateMedicine","/deleteMedicine/{id}","/ViewMedicineDetails/{id}")
                 .hasRole("SELLER")
 
-                .antMatchers("/Customerwelcome").hasRole("CUSTOMER")
+                .antMatchers("/Customerwelcome","/addcart/{id}").hasRole("CUSTOMER")
 
 
 

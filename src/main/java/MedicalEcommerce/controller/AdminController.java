@@ -1,8 +1,10 @@
 package MedicalEcommerce.controller;
 
 
+import MedicalEcommerce.model.Medicine;
 import MedicalEcommerce.model.UserDtls;
 import MedicalEcommerce.service.AdminService;
+import MedicalEcommerce.service.MedicineService;
 import MedicalEcommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +21,13 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-     UserService userservice;
+    UserService userservice;
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    MedicineService medicineService;
+
 
     UserDtls u;
 
@@ -30,14 +36,16 @@ public class AdminController {
     public String CustomerView(Model model) {
         List<UserDtls> details = adminService.getCustomersInfo();
         model.addAttribute("u", details);
-        return "ViewCustomrs";
+        model.addAttribute("m", "Customer info");
+        return "viewusersinfo";
     }
 
     @GetMapping("/viewAllSeller")
     public String view(Model model) {
         List<UserDtls> details = adminService.getSellersInfo();
         model.addAttribute("u", details);
-        return "ViewSellers";
+        model.addAttribute("m", "Seller info");
+        return "viewusersinfo";
     }
 
     @GetMapping("/edit/{id}")
@@ -48,10 +56,9 @@ public class AdminController {
     }
 
 
-
     @PostMapping("/update")
     public String updateUser(@ModelAttribute UserDtls user, HttpSession session) {
-        UserDtls updated_info=userservice.edit_userinfo(u,user);
+        UserDtls updated_info = userservice.edit_userinfo(u, user);
         userservice.update_info(updated_info);
         session.setAttribute("msg", "User Data  has been Successfully Updated..");
         return "redirect:/edit/" + u.getId();
@@ -63,6 +70,33 @@ public class AdminController {
         session.setAttribute("msg", "User has been Successfully Deleted..");
         return "redirect:/Adminwelcome";
     }
+
+
+    @GetMapping("/admin_product_view")
+    public String admin_product_view(Model model,HttpSession session){
+        List<Medicine> details = medicineService.getAllMedicine();
+        model.addAttribute("med", details);
+        model.addAttribute("role","admin");
+        return "ViewAllMedicine";
+
+    }
+
+    @GetMapping("/admin_side_product_details/{id}")
+    public String admin_product_details(@PathVariable int id, Model model) {
+        Medicine medicine = medicineService.getMedById(id);
+        model.addAttribute("med", medicine);
+        model.addAttribute("role","admin");
+        return "ProductDtls";
+    }
+
+
+    @GetMapping("/remove_sell_post/{id}")
+    public String remove_sell_post(@PathVariable int id, HttpSession session) {
+        medicineService.deleteMedicine(id);
+        session.setAttribute("msg", "Medicine has been Successfully Deleted..");
+        return "redirect:/ViewAllMedicine";
+    }
+
 
 
 

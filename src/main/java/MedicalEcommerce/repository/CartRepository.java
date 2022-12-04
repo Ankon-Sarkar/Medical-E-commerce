@@ -16,7 +16,7 @@ import java.util.List;
 public interface CartRepository extends JpaRepository <Cart, Integer> {
 
     @Query("Select c from Cart c where c.customer= :customer and c.medicine= :medicine")
-    Cart getInCart(@Param("customer") UserDtls c, @Param("medicine") Medicine id);
+    Cart checkCart(@Param("customer") UserDtls c, @Param("medicine") Medicine id);
 
     @Query("Select c from Cart c where c.customer=:customer")
     List<Cart> findmyCartItems(@Param("customer") UserDtls c);

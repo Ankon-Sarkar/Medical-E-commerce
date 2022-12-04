@@ -5,7 +5,16 @@
 <title>Add Medicine</title>
 
 <body>
-<div th:replace="userheader::nav">
+
+<div th:if="${user} == 'anonymous'">
+  <div th:replace="base::nav">
+  </div>
+</div>
+
+
+<div th:unless="${user} == 'anonymous'">
+  <div th:replace="userheader::nav">
+  </div>
 </div>
 
 
@@ -18,6 +27,7 @@
   <div class="text-center mt-3">
     <h1><p style="color:#000080;">All Medicines </h1>
   </div>
+
 <form align="center" th:action="@{/search}" method="get">
   <input type="text" name="keyword" th:value="${keyword}"  placeholder="Seach Medicine" size="50" >
   <button type="submit" class="btn btn-outline-success" >Search</button>
@@ -33,11 +43,7 @@
         <th scope="col">Name</th>
         <th scope="col">Price</th>
         <th scope="col">Seller </th>
-        <th scope="col">Composition </th>
         <th scope="col">Action</th>
-
-
-
 
 
       </tr>
@@ -49,8 +55,16 @@
         <td p style="color:#800000;"th:text="${m.medicine_name}"></td>
         <td p style="color:#800000;"th:text="${m.price}"></td>
         <td p style="color:#800000;"th:text="${m.seller_email}"></td>
-        <td p style="color:#800000;"th:text="${m.medicine_composition}"></td>
 
+        <div th:if="${role} == 'admin'">
+         <td> <a class="btn btn-sm btn-success"
+             th:href="@{/admin_side_product_details/{id}(id=${m.medicine_id})}">View</a>
+          <a class="btn btn-sm btn-danger"
+             th:href="@{/remove_sell_post/{id}/(id=${m.medicine_id})}">Remove</a></td>
+        </div>
+
+
+        <div th:unless="${role} == 'admin'">
         <td th:if="${m.quantity} > 0">
         <a class="btn btn-sm btn-success"
                th:href="@{/Customerside_ViewMedicineDetails/{id}(id=${m.medicine_id})}">View</a>
@@ -66,7 +80,7 @@
         <a class="btn btn-sm btn-success text-white"
              th:href="@{/Customerside_ViewMedicineDetails/{id}(id=${m.medicine_id})}">View</a>
           Out of Stock</td>
-
+</div>
 
 
 
@@ -77,26 +91,10 @@
   </div>
 
 
-
-
-
   </div>
-</section>
 
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+
 </body>
 </html>

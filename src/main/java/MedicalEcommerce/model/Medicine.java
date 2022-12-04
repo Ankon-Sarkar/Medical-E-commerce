@@ -26,7 +26,9 @@ public class Medicine {
     public Medicine() {
     }
 
-    public Medicine(String test_med, String s) {
+    public Medicine(String name, String seller) {
+        this.medicine_name=name;
+        this.seller_email=seller;
     }
 
 

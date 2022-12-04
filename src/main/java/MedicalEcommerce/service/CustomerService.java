@@ -13,7 +13,7 @@ public class CustomerService {
 
     @Autowired
     MedicineRepository medicineRepository;
-    public List<Medicine> getAllMedicine() {
-        return medicineRepository.findAll();
-    }
+//    public List<Medicine> getAllMedicine() {
+//        return medicineRepository.findAll();
+//    }
 }

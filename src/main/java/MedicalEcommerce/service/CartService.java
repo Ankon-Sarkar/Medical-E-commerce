@@ -27,8 +27,8 @@ public class CartService {
 
     }
 
-    public Cart getCart(UserDtls customer, Medicine id) {
-        return cartRepository.getInCart(customer,id);
+    public Cart checkCart(UserDtls customer, Medicine med_id) {
+        return cartRepository.checkCart(customer,med_id);
 
     }
 

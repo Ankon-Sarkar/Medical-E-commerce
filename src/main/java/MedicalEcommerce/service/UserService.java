@@ -18,9 +18,7 @@ public class UserService {
     //checking user existence
     public UserDtls checkUser(UserDtls user) {
         String email = user.getEmail();
-//        System.out.println(email);
         UserDtls userExists = userRepo.findByEmail(email);
-//        System.out.println(userExists);
         if (userExists != null) {
             return userExists;
         }
@@ -39,7 +37,6 @@ public class UserService {
 
     public void set_user_role(UserDtls user) {
         if (user.getRole().equals("customer")) {
-//            System.out.println(user.getRole());
             user.setRole("ROLE_CUSTOMER");
         } else if (user.getRole().equals("seller")) {
             user.setRole("ROLE_SELLER");
@@ -49,7 +46,13 @@ public class UserService {
 
     public UserDtls edit_userinfo(UserDtls previousInfo, UserDtls newInfo) {
         previousInfo.setName(newInfo.getName());
-        previousInfo.setPassword(passwordEncode.encode(newInfo.getPassword()));
+        if (newInfo.getPassword()==""){
+            previousInfo.setPassword(previousInfo.getPassword());
+        }
+        else {
+            previousInfo.setPassword(passwordEncode.encode(newInfo.getPassword()));
+        }
+
         return previousInfo;
     }
 

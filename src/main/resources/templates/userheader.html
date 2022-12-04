@@ -2,11 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 
 <head>
+
 </head>
 
-
-
 <body th:fragment="nav">
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" th:href="@{/}"><i class="bi bi-capsule-pill"></i>
@@ -18,16 +23,25 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" th:href="@{/AllMedicine}">Medicines</a>
+        <a class="nav-item nav-link" href="#">About</a>
+        <a class="nav-item nav-link" href="#">Contact</a>
+      </div>
+    </div>
 
+    <div class="float-right"><a class="nav-item nav-link" href="#"><span th:text="${username}"></span>
+    </a></div><br>
     <form th:action="@{/logout}" method="post">
-      <button type="submit" class="btn btn-danger"><i class="fas fa-sign-in-alt"></i> Logout</button>
+      <button type="submit" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </form>
   </div>
 
 
 </nav>
 
-<!--End Navbar  -->
+
 
 
 </body>

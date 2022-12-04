@@ -28,7 +28,6 @@ class MedicineRepositoryTest {
     void setup(){
         med=new Medicine("test_med","test_seller@gmail.com");
         entityManager.persist(med);
-
     }
 
     @Test
@@ -44,8 +43,8 @@ class MedicineRepositoryTest {
        assertThat(medicineRepository.findById(med.getMedicine_id())).isNotNull();
     }
 
-//    @Test
-//    void findByKeyword(){
-//        assertThat()
-//    }
+    @Test
+    void findByKeyword(){
+        assertThat(medicineRepository.findByKeyword(med.getMedicine_name())).isNotNull();
+    }
 }

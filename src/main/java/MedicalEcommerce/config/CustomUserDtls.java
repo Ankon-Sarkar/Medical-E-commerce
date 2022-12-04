@@ -21,7 +21,6 @@ public class CustomUserDtls implements UserDetails {
     }
 
     public CustomUserDtls() {
-        // TODO Auto-generated constructor stub
     }
 
     @Override
