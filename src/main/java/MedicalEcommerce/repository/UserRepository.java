@@ -21,6 +21,10 @@ public interface UserRepository extends JpaRepository<UserDtls,Integer>{
     @Query ("Select s from UserDtls s where role='ROLE_SELLER'")
     public List<UserDtls> findAllSeller();
 
+
+    @Query ("Select d from UserDtls d where role='ROLE_DELIVERYMAN'")
+    public List<UserDtls> findAllDeliveryMan();
+
     public Optional<UserDtls> findById(int id);
 
     public void deleteById(int id);

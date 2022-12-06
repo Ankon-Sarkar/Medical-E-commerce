@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base::head" />
+<title>Delivered Items</title>
+
+<body>
+<div th:replace="userheader::nav">
+</div>
+
+
+<div th:if=${session.msg}>
+    <div class="alert alert-success" role="alert" th:text="${session.msg}">
+    </div>
+    <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+</div>
+
+<div class="text-center mt-3">
+    <h1><p style="color:#000080;">All Delivered Items </h1>
+</div>
+
+
+<div class="container p-5">
+    <table class="table table-striped" border="1">
+        <thead class="bg-secondary text-white">
+        <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Buyer</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Orders </th>
+            <th scope="col">Quantity </th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orderdetails}">
+
+            <td p style="color:#800000;"th:text="${order.order_id}"></td>
+            <td p style="color:#800000;"th:text="${order.buyer_name}"></td>
+            <td p style="color:#800000;"th:text="${order.buyer_address}"></td>
+            <td p style="color:#800000;"th:text="${order.buyer_phoneNo}"></td>
+            <td p style="color:#800000;"th:text="${T(MedicalEcommerce.controller.OrderController).medname(order.product)}"></td>
+            <td p style="color:#800000;"th:text="${order.quantity}"></td>
+
+
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

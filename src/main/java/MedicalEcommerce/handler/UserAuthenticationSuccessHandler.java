@@ -30,6 +30,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
         boolean hasCustomerRole = false;
         boolean hasSellerRole = false;
         boolean hasAdminRole=false;
+        boolean hasDeliveryManRole=false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_SELLER")) {
@@ -41,6 +42,10 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
             }
             else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 hasAdminRole = true;
+                break;
+            }
+            else if (grantedAuthority.getAuthority().equals("ROLE_DELIVERYMAN")) {
+                hasDeliveryManRole = true;
                 break;
             }
         }
@@ -57,6 +62,10 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 //            System.out.println(hasSellerRole);
             redirectStrategy.sendRedirect(arg0, arg1, "/Adminwelcome");
         }
+        else if (hasDeliveryManRole) {
+            redirectStrategy.sendRedirect(arg0, arg1, "/DeliveryManWelcome");
+        }
+
         else {
             throw new IllegalStateException();
         }

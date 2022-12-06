@@ -42,10 +42,10 @@ public class SellerController {
 
     }
 
-    @GetMapping("/markAsDeliverd/{id}")
-    public String marksDeliverd(@PathVariable int id, Model model,HttpSession session){
-        orderService.markDelivered(id);
-        session.setAttribute("msg", "Product Marked as Delivered");
+    @GetMapping("/markAsShipped/{id}")
+    public String markAsShipped(@PathVariable int id, HttpSession session){
+        orderService.shipped(id);
+        session.setAttribute("msg", "Product is shipped");
         return "redirect:/viewNewOrderReq";
     }
 
@@ -54,7 +54,7 @@ public class SellerController {
         Principal principal = request.getUserPrincipal();
         String sellername=principal.getName();
         UserDtls sellerid=userService.getuserid(sellername);
-        List<OrderDtls> details = orderService.getPreviousSalesTec(sellerid);
+        List<OrderDtls> details = orderService.getPreviousSalesRec(sellerid);
         model.addAttribute("orderdetails", details);
         return "viewPreviousSalesRecord";
     }

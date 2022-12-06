@@ -40,10 +40,8 @@ public class CartController {
         Medicine medicine = medicineservice.getMedById(id);
         Principal principal = request.getUserPrincipal();
 
-        if (principal == null) {
-            session.setAttribute("msg", "Login First");
-        }
-        else {
+        if (principal != null) {
+
             String customer_name = principal.getName();
             UserDtls customer = userService.getuserid(customer_name);
 
@@ -61,7 +59,10 @@ public class CartController {
             } else {
                 session.setAttribute("msg", "This item already added to cart");
             }
+        }
 
+        else {
+            session.setAttribute("msg", "Login First");
         }
         return "redirect:/ViewAllMedicine";
     }

@@ -42,14 +42,15 @@
         <td p style="color:#800000;"th:text="${order.order_id}"></td>
         <td p style="color:#800000;"th:text="${order.buyer_name}"></td>
         <td p style="color:#800000;"th:text="${order.buyer_address}"></td>
-        <td p style="color:#800000;"th:text="${T(com.example.medic.controller.OrderController).medname(order.product)}"></td>
-        <td p style="color:#800000;"th:text="${T(com.example.medic.controller.OrderController).sellername(order.sellerID)}"></td>
+        <td p style="color:#800000;"th:text="${T(MedicalEcommerce.controller.OrderController).medname(order.product)}"></td>
+        <td p style="color:#800000;"th:text="${T(MedicalEcommerce.controller.OrderController).sellername(order.sellerID)}"></td>
         <td p style="color:#800000;"th:text="${order.quantity}"></td>
         <td p style="color:#800000;"th:text="${order.total_bill}"></td>
 
 
-        <td th:if="${order.isDelivered=='Yes'}" > <p style="color:green;">Delivered</td>
-        <td th:unless="${order.isDelivered=='Yes'}" > <p style="color:red;">Not Delivered Yet</td>
+        <td th:if="${order.delivery_status=='Delivered'}" > <p style="color:green;">Delivered</td>
+        <td th:if="${order.delivery_status=='On Process'}" > <p style="color:red;">On Process</td>
+          <td th:if="${order.delivery_status=='Shipped'}" > <p style="color:blue;">Shipped</td>
 
 
 
@@ -64,24 +65,10 @@
 
 
 
-
   </div>
-</section>
 
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+
 </body>
 </html>

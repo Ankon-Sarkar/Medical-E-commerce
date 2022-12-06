@@ -50,13 +50,10 @@ public class OrderController {
 
     @GetMapping("/proccedToBuy/{id}")
     public String buyProcced(@PathVariable int id, Model model, @ModelAttribute OrderDtls orderDtls) {
-         med_id = id;
-
+        med_id = id;
         medicine = medicineService.getMedById(med_id);
-//        medicine_name=medicine.getMedicine_name();
         seller= medicine.getSeller();
         med_price=Integer.parseInt(medicine.getPrice());
-        med_price=medicineService.findMedPrice(medicine);
         return "buyForm";
     }
 
@@ -70,7 +67,6 @@ public class OrderController {
         buyerAddress=orderDtls.getBuyer_address();
         buyerPhnNo=orderDtls.getBuyer_phoneNo();
         total=ordered_unit*med_price;
-
         return  "PayHere";
 
     }
@@ -80,7 +76,7 @@ public class OrderController {
         orderDtls.setBuyer(buyer);
         orderDtls.setProduct(medicine);
         orderDtls.setSellerID(seller);
-        orderDtls.setIsDelivered("No");
+        orderDtls.setDelivery_status("On Process");
         orderDtls.setPayment("done");
         orderDtls.setQuantity(ordered_unit);
         orderDtls.setBuyer_name(buyerName);

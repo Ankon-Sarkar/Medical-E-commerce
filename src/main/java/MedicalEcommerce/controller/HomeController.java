@@ -1,12 +1,7 @@
 package MedicalEcommerce.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-
 import MedicalEcommerce.model.Medicine;
 import MedicalEcommerce.model.UserDtls;
-import MedicalEcommerce.service.CustomerService;
 import MedicalEcommerce.service.MedicineService;
 import MedicalEcommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 
@@ -26,28 +22,14 @@ import java.util.List;
 public class HomeController {
 
 
-
     UserDtls user_prevInfo;
-
     @Autowired
-    private BCryptPasswordEncoder passwordEncode;
-
-    @Autowired
-    private UserService userservice;
-
-    @Autowired
-    CustomerService customerService;
-
+    UserService userservice;
     @Autowired
     MedicineService medicineService;
-
-
-    @Autowired
-    UserService userService;
-
-
     Principal principal;
-
+    @Autowired
+    private BCryptPasswordEncoder passwordEncode;
 
     @GetMapping("/")
     public String home() {
@@ -67,13 +49,13 @@ public class HomeController {
 
     //register user and assign role to users
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute UserDtls user, Model m, HttpSession session) {
+    public String saveUser(@ModelAttribute UserDtls user, HttpSession session) {
 
         user.setPassword(passwordEncode.encode(user.getPassword()));
 
         userservice.set_user_role(user);
 
-        //checking user existence, if a existing user has same email address he/she cannot register
+        //checking user existence, if an existing user has same email address he/she cannot register
         UserDtls u = userservice.checkUser(user);
 
         if (u == null) {
@@ -92,7 +74,7 @@ public class HomeController {
     public String WelcomeCustomer(HttpServletRequest request, Model model) {
         principal = request.getUserPrincipal();
         model.addAttribute("username", principal.getName());
-        model.addAttribute("role","customer");
+        model.addAttribute("role", "customer");
         return "UserDashBoard";
     }
 
@@ -102,7 +84,7 @@ public class HomeController {
     public String WelcomeSeller(HttpServletRequest request, Model model) {
         principal = request.getUserPrincipal();
         model.addAttribute("username", principal.getName());
-        model.addAttribute("role","seller");
+        model.addAttribute("role", "seller");
         return "UserDashBoard";
     }
 
@@ -112,10 +94,18 @@ public class HomeController {
     public String WelcomeAdmin(HttpServletRequest request, Model model) {
         principal = request.getUserPrincipal();
         model.addAttribute("username", principal.getName());
-        model.addAttribute("role","admin");
+        model.addAttribute("role", "admin");
         return "UserDashBoard";
     }
 
+
+    @GetMapping("/DeliveryManWelcome")
+    public String WelcomeDeliveryMan(HttpServletRequest request, Model model) {
+        principal = request.getUserPrincipal();
+        model.addAttribute("username", principal.getName());
+        model.addAttribute("role", "deliveryman");
+        return "UserDashBoard";
+    }
 
 
     @GetMapping("/AllMedicine")
@@ -123,23 +113,22 @@ public class HomeController {
         List<Medicine> details = medicineService.getAllMedicine();
         model.addAttribute("med", details);
 
-        principal=request.getUserPrincipal();
+        principal = request.getUserPrincipal();
 
-        if (principal==null){
-            model.addAttribute("user","anonymous");
-        }
-        else {
-            model.addAttribute("user","logged in");
+        if (principal == null) {
+            model.addAttribute("user", "anonymous");
+        } else {
+            model.addAttribute("user", "logged in");
 
         }
         return "ViewAllMedicine";
     }
 
     @GetMapping("/resetUserInfo")
-    public  String  resetUserInfo (HttpServletRequest request, Model model){
+    public String resetUserInfo(HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
         String user_name = principal.getName();
-        user_prevInfo = userService.getuserid(user_name);
+        user_prevInfo = userservice.getuserid(user_name);
         model.addAttribute("user", user_prevInfo);
         return "resetinfo";
     }
@@ -151,15 +140,6 @@ public class HomeController {
         session.setAttribute("msg", "User Data  has been Successfully Updated..");
         return "redirect:/resetUserInfo";
     }
-
-
-
-
-
-
-
-
-
 
 
 }

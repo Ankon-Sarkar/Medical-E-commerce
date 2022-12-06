@@ -7,6 +7,7 @@ import MedicalEcommerce.service.AdminService;
 import MedicalEcommerce.service.MedicineService;
 import MedicalEcommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,8 @@ public class AdminController {
     @Autowired
     MedicineService medicineService;
 
-
+    @Autowired
+    BCryptPasswordEncoder passwordEncode;
     UserDtls u;
 
 
@@ -98,6 +100,28 @@ public class AdminController {
     }
 
 
+    @GetMapping("/addDeliveryMan")
+    public String addDeliveryMan() {
+        return "add-delivery-man";
 
+    }
+
+    @PostMapping("/saveDeliveryMan")
+    public String saveDeliveryMan(@ModelAttribute UserDtls user, HttpSession session){
+        user.setPassword(passwordEncode.encode(user.getPassword()));
+       user.setRole("ROLE_DELIVERYMAN");
+        //checking user existence, if an existing user has same email address he/she cannot register
+        UserDtls u = userservice.checkUser(user);
+
+        if (u == null) {
+            userservice.register(user);
+            session.setAttribute("msg", "Successfully Register");
+        } else {
+            session.setAttribute("msg", "Try with another email address");
+        }
+
+        return "redirect:/addDeliveryMan";
+
+    }
 
 }

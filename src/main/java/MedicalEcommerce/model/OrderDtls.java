@@ -12,12 +12,12 @@ public class OrderDtls {
     private String buyer_address;
     private String buyer_phoneNo;
     private String payment;
-    private String isDelivered;
+    private String delivery_status;
 
     private  int quantity;
 
     private int total_bill;
-
+    private int deliveryman_id;
 
 
     @ManyToOne
@@ -28,7 +28,6 @@ public class OrderDtls {
 
     @ManyToOne
     private UserDtls sellerID;
-
 
     public int getOrder_id() {
         return order_id;
@@ -70,8 +69,12 @@ public class OrderDtls {
         this.payment = payment;
     }
 
-    public String getIsDelivered() {
-        return isDelivered;
+    public String getDelivery_status() {
+        return delivery_status;
+    }
+
+    public void setDelivery_status(String delivery_status) {
+        this.delivery_status = delivery_status;
     }
 
     public int getQuantity() {
@@ -82,14 +85,25 @@ public class OrderDtls {
         this.quantity = quantity;
     }
 
-    public void setIsDelivered(String isDelivered) {
-        this.isDelivered = isDelivered;
+    public int getTotal_bill() {
+        return total_bill;
+    }
+
+    public void setTotal_bill(int total_bill) {
+        this.total_bill = total_bill;
+    }
+
+    public int getDeliveryman_id() {
+        return deliveryman_id;
+    }
+
+    public void setDeliveryman_id(int deliveryman_id) {
+        this.deliveryman_id = deliveryman_id;
     }
 
     public UserDtls getBuyer() {
         return buyer;
     }
-
 
     public void setBuyer(UserDtls buyer) {
         this.buyer = buyer;
@@ -109,13 +123,5 @@ public class OrderDtls {
 
     public void setSellerID(UserDtls sellerID) {
         this.sellerID = sellerID;
-    }
-
-    public int getTotal_bill() {
-        return total_bill;
-    }
-
-    public void setTotal_bill(int total_bill) {
-        this.total_bill = total_bill;
     }
 }

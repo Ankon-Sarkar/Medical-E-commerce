@@ -72,10 +72,6 @@ public class MedicineService {
             return false;
     }
 
-    public int findMedPrice(Medicine medicine) {
-        return Integer.parseInt(medicine.getPrice());
-    }
-
 
     public Medicine set_new_info(Medicine previous_info, Medicine new_info) {
         previous_info.setMedicine_name(new_info.getMedicine_name());
