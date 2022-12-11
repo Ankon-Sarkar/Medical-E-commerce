@@ -18,7 +18,7 @@
     <a  th:href="@{/ViewAllMedicine}">All Products</a>
     <a th:href="@{/viewmycart}">My Cart</a>
     <a th:href="@{/viewMyOrders}">My Orders</a>
-    <a th:href="@{/resetUserInfo}">Reset Info</a>
+    <a th:href="@{/resetUserInfo}">Reset myInfo</a>
 </div>
 </div>
 
@@ -33,8 +33,8 @@
 
 <div th:if="${role} == 'admin'">
     <div class="sidenav">
-        <a th:href="@{/viewAllCustomer}"> View Customers</a>
-        <a th:href="@{/viewAllSeller}">View Sellers</a>
+        <a th:href="@{/viewAllCustomer}">Customers List</a>
+        <a th:href="@{/viewAllSeller}">Sellers List</a>
         <a th:href="@{/admin_product_view}">Sell Posts</a>
         <a th:href="@{/addDeliveryMan}">Add DeliveryMan</a>
 
@@ -43,7 +43,7 @@
 
 <div th:if="${role} =='deliveryman'">
     <div class="sidenav">
-        <a th:href="@{/view-pending-deliveryItems}">Pending Delivery</a>
+        <a th:href="@{/view-pending-deliveryItems}">Pending</a>
         <a th:href="@{/view-deliveredItems}">Delivered</a>
 
 

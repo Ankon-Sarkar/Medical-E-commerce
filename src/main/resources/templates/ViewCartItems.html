@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="base::head" />
-<title>Add Medicine</title>
+<title>View Cart</title>
 
 <body>
 <div th:replace="userheader::nav">
@@ -40,7 +40,7 @@
         <td scope="row"><img alt="" th:src="*{'data:image/jpeg;base64,'+{m.image}}" style="width: 100px;height: 100px;"></td>
         <td p style="color:#800000;"th:text="${m.medicine_name}"></td>
         <td p style="color:#800000;"th:text="${m.price}"></td>
-        <td p style="color:#800000;"th:text="${m.seller}"></td>
+        <td p style="color:#800000;"th:text="${m.seller_email}"></td>
 
         <td th:if="${m.quantity} > 0">
         <a class="btn btn-sm btn-danger"

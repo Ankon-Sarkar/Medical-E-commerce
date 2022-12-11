@@ -24,19 +24,17 @@ public class CartService {
 
     public void saveTocart(Cart cart) {
         cartRepository.save(cart);
-
     }
 
-    public Cart checkCart(UserDtls customer, Medicine med_id) {
-        return cartRepository.checkCart(customer,med_id);
-
+    public boolean checkAlreadyAdded(UserDtls customer, Medicine med_id) {
+        Cart is_added= cartRepository.checkCart(customer,med_id);
+        if(is_added==null){
+            return false;
+        }
+        return true;
     }
 
-    public List<Cart> getAllCartItem() {
-        return cartRepository.findAll();
-    }
-
-    public List<Cart> getmycartItens(UserDtls customer) {
+    public List<Cart> getmycartItems(UserDtls customer) {
         return  cartRepository.findmyCartItems(customer);
     }
 

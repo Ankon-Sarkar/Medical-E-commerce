@@ -25,7 +25,7 @@ class MedicineRepositoryTest {
     Medicine med;
 
     @BeforeEach
-    void setup(){
+    void setUp(){
         med=new Medicine("test_med","test_seller@gmail.com");
         entityManager.persist(med);
     }
@@ -34,13 +34,11 @@ class MedicineRepositoryTest {
     void findStockBYSeller() {
         List<Medicine> med_details=medicineRepository.findStockBYSeller(med.getSeller_email());
         assertThat(med_details.size() > 0);
-
-
     }
 
     @Test
     void findById() {
-       assertThat(medicineRepository.findById(med.getMedicine_id())).isNotNull();
+        assertThat(medicineRepository.findById(med.getMedicine_id())).isNotNull();
     }
 
     @Test

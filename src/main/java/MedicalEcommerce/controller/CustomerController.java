@@ -4,7 +4,6 @@ package MedicalEcommerce.controller;
 import MedicalEcommerce.model.Medicine;
 import MedicalEcommerce.model.OrderDtls;
 import MedicalEcommerce.model.UserDtls;
-import MedicalEcommerce.service.CustomerService;
 import MedicalEcommerce.service.MedicineService;
 import MedicalEcommerce.service.OrderService;
 import MedicalEcommerce.service.UserService;
@@ -25,13 +24,9 @@ public class CustomerController {
 
 
     @Autowired
-    CustomerService customerService;
-    @Autowired
     MedicineService medicineservice;
-
     @Autowired
     OrderService orderService;
-
     @Autowired
     UserService userService;
 
@@ -40,6 +35,7 @@ public class CustomerController {
     public String CustomerView(Model model, HttpServletRequest request) {
         List<Medicine> details = medicineservice.getAllMedicine();
         model.addAttribute("med", details);
+        model.addAttribute("role","customer");
         return "ViewAllMedicine";
     }
 
@@ -54,7 +50,6 @@ public class CustomerController {
         if (principal == null) {
             model.addAttribute("user", "anonymous");
         }
-
         return "ProductDtls";
     }
 

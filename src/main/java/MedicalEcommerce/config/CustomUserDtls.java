@@ -1,7 +1,6 @@
 package MedicalEcommerce.config;
 
 import java.util.Arrays;
-import java.util.Arrays;
 import java.util.Collection;
 
 

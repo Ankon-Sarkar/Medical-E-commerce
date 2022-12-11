@@ -56,7 +56,7 @@ public class HomeController {
         userservice.set_user_role(user);
 
         //checking user existence, if an existing user has same email address he/she cannot register
-        UserDtls u = userservice.checkUser(user);
+        UserDtls u = userservice.checkUserExistence(user);
 
         if (u == null) {
             userservice.register(user);
@@ -73,7 +73,7 @@ public class HomeController {
     @GetMapping("/Customerwelcome")
     public String WelcomeCustomer(HttpServletRequest request, Model model) {
         principal = request.getUserPrincipal();
-        model.addAttribute("username", principal.getName());
+        model.addAttribute("username", principal.getName()+" [Customer]");
         model.addAttribute("role", "customer");
         return "UserDashBoard";
     }
@@ -83,7 +83,7 @@ public class HomeController {
     @GetMapping("/Sellerwelcome")
     public String WelcomeSeller(HttpServletRequest request, Model model) {
         principal = request.getUserPrincipal();
-        model.addAttribute("username", principal.getName());
+        model.addAttribute("username", principal.getName()+" [Seller]");
         model.addAttribute("role", "seller");
         return "UserDashBoard";
     }
@@ -93,7 +93,7 @@ public class HomeController {
     @GetMapping("/Adminwelcome")
     public String WelcomeAdmin(HttpServletRequest request, Model model) {
         principal = request.getUserPrincipal();
-        model.addAttribute("username", principal.getName());
+        model.addAttribute("username", principal.getName()+" [Admin]");
         model.addAttribute("role", "admin");
         return "UserDashBoard";
     }
@@ -102,7 +102,7 @@ public class HomeController {
     @GetMapping("/DeliveryManWelcome")
     public String WelcomeDeliveryMan(HttpServletRequest request, Model model) {
         principal = request.getUserPrincipal();
-        model.addAttribute("username", principal.getName());
+        model.addAttribute("username", principal.getName()+" [DeliveryMan]");
         model.addAttribute("role", "deliveryman");
         return "UserDashBoard";
     }

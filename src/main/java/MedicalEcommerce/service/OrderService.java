@@ -28,7 +28,6 @@ public class OrderService {
 
     public List<OrderDtls> getAlNewOrderInfo(UserDtls sellerId) {
         return orderDtlsRepository.findAllnewOrderinfo(sellerId);
-
     }
 
     public void shipped(int id){
@@ -56,7 +55,6 @@ public class OrderService {
         UserDtls deliveryman=deliveryman_list.get(randomIndex);
         System.out.println(deliveryman.getId());
         product.setDeliveryman_id(deliveryman.getId());
-
     }
 
     public List<OrderDtls> getPendingDelivery(int deliveryman_id) {

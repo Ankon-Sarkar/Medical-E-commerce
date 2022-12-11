@@ -13,7 +13,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -23,9 +22,8 @@ class CartRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
-
     @Autowired
-    CartRepository cartRepository;
+    private CartRepository cartRepository;
 
     UserDtls customer;
     Medicine med;
@@ -33,16 +31,14 @@ class CartRepositoryTest {
 
 
     @BeforeEach
-    void setup(){
+    void setUp(){
         customer=new UserDtls();
         med=new Medicine();
         cart=new Cart(customer,med);
         entityManager.persist(customer);
         entityManager.persist(med);
         entityManager.persist(cart);
-
     }
-
 
 
     @Test
@@ -51,9 +47,6 @@ class CartRepositoryTest {
         int expected_cart_id= cart.getCart_id();
         assertEquals(Actual_cart_id,expected_cart_id);
     }
-
-
-
 
 
     @Test
@@ -67,6 +60,5 @@ class CartRepositoryTest {
         cartRepository.deleteCartItem(customer,med);
         List<Cart> cart_items=cartRepository.findmyCartItems(cart.getCustomer());
         assertEquals(cart_items.size(),0);
-
     }
 }

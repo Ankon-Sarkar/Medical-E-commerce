@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="base::head" />
-<title>Add Medicine</title>
+<title> Medicine List</title>
 
 <body>
 
@@ -70,7 +70,7 @@
                th:href="@{/Customerside_ViewMedicineDetails/{id}(id=${m.medicine_id})}">View</a>
 
           <a class="btn btn-sm btn-info text-white"
-             th:href="@{/proccedToBuy/{id}/(id=${m.medicine_id})}">Buy Now</a>
+             th:href="@{/proceedToBuy/{id}/(id=${m.medicine_id})}">Buy Now</a>
           <a class="btn btn-sm btn-warning text-white"
              th:href="@{/addcart/{id}(id=${m.medicine_id})}">Add to Cart</a> </td>
 

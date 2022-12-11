@@ -35,7 +35,7 @@ public class AdminController {
 
 
     @GetMapping("/viewAllCustomer")
-    public String CustomerView(Model model) {
+    public String viewCustomer(Model model) {
         List<UserDtls> details = adminService.getCustomersInfo();
         model.addAttribute("u", details);
         model.addAttribute("m", "Customer info");
@@ -43,7 +43,7 @@ public class AdminController {
     }
 
     @GetMapping("/viewAllSeller")
-    public String view(Model model) {
+    public String viewSeller(Model model) {
         List<UserDtls> details = adminService.getSellersInfo();
         model.addAttribute("u", details);
         model.addAttribute("m", "Seller info");
@@ -109,17 +109,16 @@ public class AdminController {
     @PostMapping("/saveDeliveryMan")
     public String saveDeliveryMan(@ModelAttribute UserDtls user, HttpSession session){
         user.setPassword(passwordEncode.encode(user.getPassword()));
-       user.setRole("ROLE_DELIVERYMAN");
+        user.setRole("ROLE_DELIVERYMAN");
         //checking user existence, if an existing user has same email address he/she cannot register
-        UserDtls u = userservice.checkUser(user);
+        UserDtls u = userservice.checkUserExistence(user);
 
         if (u == null) {
             userservice.register(user);
             session.setAttribute("msg", "Successfully Register");
         } else {
-            session.setAttribute("msg", "Try with another email address");
+            session.setAttribute("msg", "This email already exists");
         }
-
         return "redirect:/addDeliveryMan";
 
     }

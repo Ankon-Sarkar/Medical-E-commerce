@@ -46,16 +46,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/Sellerwelcome", "/addMedicine","/ViewSellerStock","/editMedicine/{id}",
-                        "/updateMedicine","/deleteMedicine/{id}","/ViewMedicineDetails/{id}")
+        http.authorizeRequests().antMatchers("/Sellerwelcome/**", "/addMedicine/**","/saveMedicine/**","/ViewSellerStock/**","/editMedicine/{id}/**",
+                        "/updateMedicine/**","/deleteMedicine/{id}/**","/ViewMedicineDetails/{id}/**","/resetUserInfo/**","/reset/**","/viewNewOrderReq/**",
+                        "/markAsShipped/{id}/**","/viewPreviousSalesRecord/**","/ViewMedicineDetails/{id}/**")
                 .hasRole("SELLER")
 
-                .antMatchers("/Customerwelcome","/addcart/{id}").hasRole("CUSTOMER")
+
+                .antMatchers("/Customerwelcome/**","/addcart/{id}/**","/resetUserInfo/**","/reset/**","/ViewAllMedicine/**",
+                        "/Customerside_ViewMedicineDetails/{id}/**","/viewMyOrders/**","/proceedToBuy/{id}/**","/buyNow/**","/paymentSuccess/**",
+                        "/pay/**").hasRole("CUSTOMER")
 
 
-
-                .antMatchers("/Adminwelcome","/viewAllCustomer","/viewAllSeller","/edit/{id}","/update","/delete/{id}")
+                .antMatchers("/Adminwelcome/**","/viewAllCustomer/**","/viewAllSeller/**","/edit/{id}/**","/update/**","/delete/{id}/**",
+                        "/admin_product_view/**","/admin_side_product_details/{id}/**","/remove_sell_post/{id}/**","/addDeliveryMan/**",
+                        "/saveDeliveryMan/**")
                 .hasRole("ADMIN")
+
+                .antMatchers("/view-pending-deliveryItems/**","/markAsDelivered/{id}/**","/view-deliveredItems/**").
+                hasRole("DELIVERYMAN")
+
+
                 .antMatchers("/**").permitAll().and().formLogin().loginPage("/login").loginProcessingUrl("/login").successHandler(successHandler).and() .logout() .logoutUrl("/logout")
                 .logoutSuccessUrl("/login");
 

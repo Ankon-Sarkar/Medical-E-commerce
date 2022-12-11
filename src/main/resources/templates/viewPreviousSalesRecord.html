@@ -42,14 +42,9 @@
                 <td p style="color:#800000;"th:text="${order.buyer_name}"></td>
                 <td p style="color:#800000;"th:text="${order.buyer_address}"></td>
                 <td p style="color:#800000;"th:text="${order.buyer_phoneNo}"></td>
-                <td p style="color:#800000;"th:text="${T(com.example.medic.controller.OrderController).medname(order.product)}"></td>
+                <td p style="color:#800000;"th:text="${T(MedicalEcommerce.controller.OrderController).medname(order.product)}"></td>
                 <td p style="color:#800000;"th:text="${order.quantity}"></td>
                 <td p style="color:#800000;"th:text="${order.total_bill}"></td>
-
-
-
-
-
 
 
             </tr>

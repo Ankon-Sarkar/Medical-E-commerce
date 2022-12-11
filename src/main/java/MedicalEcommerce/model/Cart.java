@@ -12,6 +12,9 @@ public class Cart {
     @ManyToOne
     private UserDtls customer;
 
+    @ManyToOne
+    private Medicine medicine;
+
     public Cart() {
     }
 
@@ -19,9 +22,6 @@ public class Cart {
         this.customer = customer;
         this.medicine = medicine;
     }
-
-    @ManyToOne
-    private Medicine medicine;
 
     public int getCart_id() {
         return cart_id;

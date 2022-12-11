@@ -24,17 +24,15 @@ public class MedicineService {
 
     public void saveProduct(Medicine medicine, MultipartFile imagefile) throws IOException {
         if (imagefile == null) {
-            MedicineRepository medicineRepository;
             medicine.setImage(null);
+        } else {
+            try {
+                medicine.setImage(Base64.getEncoder().encodeToString(imagefile.getBytes()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            medicineRepository.save(medicine);
         }
-        String fileName = StringUtils.cleanPath(imagefile.getOriginalFilename());
-
-        try {
-            medicine.setImage(Base64.getEncoder().encodeToString(imagefile.getBytes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        medicineRepository.save(medicine);
     }
 
     public List<Medicine> getSockInfo(String seller) {

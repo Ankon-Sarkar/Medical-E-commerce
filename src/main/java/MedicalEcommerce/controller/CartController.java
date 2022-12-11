@@ -22,14 +22,10 @@ import java.util.List;
 
 @Controller
 public class CartController {
-
-
     @Autowired
     MedicineService medicineservice;
-
     @Autowired
     CartService cartService;
-
     @Autowired
     UserService userService;
 
@@ -39,28 +35,21 @@ public class CartController {
 
         Medicine medicine = medicineservice.getMedById(id);
         Principal principal = request.getUserPrincipal();
-
         if (principal != null) {
-
             String customer_name = principal.getName();
             UserDtls customer = userService.getuserid(customer_name);
 
-            if (medicine.getQuantity() <= 0) {
-                session.setAttribute("msg", "Not Possible to Add in Cart");
-            }
-
             //Checking product is already added to cart or not
-            if (cartService.checkCart(customer, medicine) == null) {
+            if (!cartService.checkAlreadyAdded(customer, medicine)) {
                 cart.setCustomer(customer);
                 cart.setMedicine(medicine);
                 cartService.saveTocart(cart);
                 session.setAttribute("msg", "Added to Cart");
-
-            } else {
+            }
+            else {
                 session.setAttribute("msg", "This item already added to cart");
             }
         }
-
         else {
             session.setAttribute("msg", "Login First");
         }
@@ -68,22 +57,20 @@ public class CartController {
     }
 
     @GetMapping("/viewmycart")
-    public String viewCart(@ModelAttribute Cart cart, Model model, HttpSession session, HttpServletRequest request){
+    public String viewCart( Model model, HttpServletRequest request){
         Principal principal = request.getUserPrincipal();
         String customer_name=principal.getName();
-
         UserDtls customer_id=userService.getuserid(customer_name);
-        List<Cart> cartitems=cartService.getmycartItens(customer_id);
-        List<Medicine> med=new ArrayList<>() ;
+        List<Cart> cartitems=cartService.getmycartItems(customer_id);;
 
+       //exacting medicine info from cart
+        List<Medicine> med=new ArrayList<>() ;
         for (int i=0;i<cartitems.size();i++){
             Cart item=cartitems.get(i);
             Medicine cart_Med=item.getMedicine();
             med.add(cart_Med);
         }
-
         model.addAttribute("med",med );
-
         return "ViewCartItems";
     }
 

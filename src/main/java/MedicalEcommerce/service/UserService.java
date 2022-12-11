@@ -16,13 +16,12 @@ public class UserService {
     private BCryptPasswordEncoder passwordEncode;
 
     //checking user existence
-    public UserDtls checkUser(UserDtls user) {
+    public UserDtls checkUserExistence(UserDtls user) {
         String email = user.getEmail();
         UserDtls userExists = userRepo.findByEmail(email);
         if (userExists != null) {
             return userExists;
         }
-
         return null;
 
     }
