@@ -14,7 +14,6 @@ public class UserDtls {
     private String name;
     private String email;
     private String password;
-
     private String role;
 
     @OneToMany(mappedBy="seller", cascade = CascadeType.REMOVE)

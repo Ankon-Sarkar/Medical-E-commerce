@@ -79,7 +79,7 @@ public class AdminController {
         List<Medicine> details = medicineService.getAllMedicine();
         model.addAttribute("med", details);
         model.addAttribute("role","admin");
-        return "ViewAllMedicine";
+        return "all-medicine-list";
 
     }
 

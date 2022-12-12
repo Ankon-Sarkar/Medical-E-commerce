@@ -31,7 +31,6 @@ public class MedicineController {
     @GetMapping("/addMedicine")
     public String addMedicinepage() {
         return "addMedicine";
-
     }
 
     @PostMapping("/saveMedicine")
@@ -86,8 +85,7 @@ public class MedicineController {
             List<Medicine> med = medicineservice.getByKeyword(keyword);
             model.addAttribute("med", med);
         }
-        return "ViewAllMedicine";
-
+        return "all-medicine-list";
     }
 
 

@@ -121,7 +121,7 @@ public class HomeController {
             model.addAttribute("user", "logged in");
 
         }
-        return "ViewAllMedicine";
+        return "all-medicine-list";
     }
 
     @GetMapping("/resetUserInfo")

@@ -36,7 +36,7 @@ public class CustomerController {
         List<Medicine> details = medicineservice.getAllMedicine();
         model.addAttribute("med", details);
         model.addAttribute("role","customer");
-        return "ViewAllMedicine";
+        return "all-medicine-list";
     }
 
     @GetMapping("/Customerside_ViewMedicineDetails/{id}")
