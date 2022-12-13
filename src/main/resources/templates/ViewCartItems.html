@@ -47,7 +47,7 @@
            th:href="@{/deleteCartItem/{id}/(id=${m.medicine_id})}">Remove</a>
 
         <a class="btn btn-sm btn-info text-white"
-           th:href="@{/proccedToBuy/{id}/(id=${m.medicine_id})}">Buy Now</a></td>
+           th:href="@{/proceedToBuy/{id}/(id=${m.medicine_id})}">Buy Now</a></td>
 
         <td th:unless="${m.quantity} > 0"><p style="color:red;">
           <a class="btn btn-sm btn-danger"

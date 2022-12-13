@@ -81,7 +81,6 @@ public class MedicineController {
     @GetMapping("/search")
     public String search(Model model, @Param("keyword") String keyword) {
         if (keyword != null) {
-            System.out.println(keyword);
             List<Medicine> med = medicineservice.getByKeyword(keyword);
             model.addAttribute("med", med);
         }
